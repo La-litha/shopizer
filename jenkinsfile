@@ -9,13 +9,13 @@ pipeline {
     stage ('Build') {
       steps{
         echo "Building Project"
-        sh './mvnw package'
+        sh 'mvn install -DskipTests=true'
       }
     }
     stage ('Archive') {
       steps{
         echo "Archiving Project"
-        archiveArtifacts artifacts: '**/*.jar', followSymlinks: false
+        archiveArtifacts artifacts: '**/*.war', followSymlinks: false
       }
     }
     stage ('Build Docker Image') {
